@@ -1,0 +1,86 @@
+<div class="col-12">
+  <div class="row my-4">
+    <div class="col-12">
+      <h1 class="float-left text-color">Shopping Cart ({{itemsInShoppingCart.length}})</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="row" *ngIf="itemsInShoppingCart.length>0">
+        <div class="col-8">
+          <div class="row mb-3" *ngFor="let section of itemsInShoppingCart;let i = index">
+            <div class="col-2 p-2"><img [src]="section.image" class="w-100 img-fluid img-thumbnail"></div>
+            <div class="col-6 p-2">
+              <div class="row">
+                <div class="col-12 mb-2"><h2>{{section.name}}</h2></div>
+                <div class="col-12 mb-1 text-color"><i class="fa fa-inr mr-1"></i>{{section.price}}</div>
+                
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-4 my-3">
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend cr_hover" (click)="decreased(section)">
+                          <div class="input-group-text"><i class="fa fa-minus"></i></div>
+                        </div>
+                        <input type="text" name="quantity_{{i}}" class="form-control" id="quantity_{{i}}" (keypress)="numberOnly($event)" placeholder="Quantity" [(ngModel)]="section.quantity">
+                        <div class="input-group-append cr_hover" (click)="increment(section)">
+                          <div class="input-group-text"><i class="fa fa-plus"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 my-3">
+                      <div class="_bin cr_hover" (click)="item_remove(section);"><i class="fa fa-trash-o"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="border-bottom box-shadow text-uppercase" style="color: cadetblue;font-size: 28px;">order sumary</h2>
+            </div>
+            <div class="col-12">
+              <div class="row justify-content-center">
+                  <div class="col-12" style="min-height: 200px;">
+                    <div class="row justify-content-center">
+                      <div class="col-11 mt-2" *ngFor="let section of itemsInShoppingCart;let j = index">
+                        <div class="row">
+                            <div class="col-9 px-0">
+                                <h5 class="mb-1">{{section.name}}</h5>
+                            </div>
+                            <div class="col-3 px-0 text-right">
+                                <span class="_text_quantity">Rs. {{section.price * section.quantity}}</span>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-11 border-top box-shadow">
+                    <div class="row">
+                      <div class="col-6 mb-1 text-color order_total px-0">Order total</div>
+                      <div class="col-6 mb-1 text-color order_total px-0 text-right"><i class="fa fa-inr mr-1"></i>{{total_price}}</div>
+                      <div class="col-12 px-0 mt-4">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+      <div class="row" *ngIf="itemsInShoppingCart.length==0">
+        <div class="col-12 text-center">
+          <h4 class="mb-3">Cart is empty</h4>
+          <button type="button" class="btn btn-primary btn-lg" (click)="add_product();">Add Product</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+ 
+</div>
